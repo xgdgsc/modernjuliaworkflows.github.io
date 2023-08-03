@@ -57,20 +57,20 @@ julia&gt; String&#40;take&#33;&#40;io&#41;&#41;
 
 </ul>
 <pre><code class=language-julia-repl >&#40;modernjuliaworkflows.github.io&#41; pkg&gt; activate --temp
-Activating new project at `/tmp/jl_xSD2JZ`
+Activating new project at `/tmp/jl_m4h8AH`
 
-&#40;jl_xSD2JZ&#41; pkg&gt; status
-Status `/tmp/jl_xSD2JZ/Project.toml` (empty project)
+&#40;jl_m4h8AH&#41; pkg&gt; status
+Status `/tmp/jl_m4h8AH/Project.toml` (empty project)
 
-&#40;jl_xSD2JZ&#41; pkg&gt; add Example
+&#40;jl_m4h8AH&#41; pkg&gt; add Example
 Resolving package versions...
-    Updating `/tmp/jl_xSD2JZ/Project.toml`
+    Updating `/tmp/jl_m4h8AH/Project.toml`
   [7876af07] + Example v0.5.3
-    Updating `/tmp/jl_xSD2JZ/Manifest.toml`
+    Updating `/tmp/jl_m4h8AH/Manifest.toml`
   [7876af07] + Example v0.5.3
 
-&#40;jl_xSD2JZ&#41; pkg&gt; status
-Status `/tmp/jl_xSD2JZ/Project.toml`
+&#40;jl_m4h8AH&#41; pkg&gt; status
+Status `/tmp/jl_m4h8AH/Project.toml`
   [7876af07] Example v0.5.3
 </code></pre>
 
@@ -136,11 +136,11 @@ julia&gt; Pluto.run&#40;&#41;</code></pre>
 <p>TLDR: Pkg.jl lets you <code>activate</code> independent, reproducible environments to <code>add</code> and <code>remove</code> project-specific &#40;versions of&#41; packages.</p>
 </blockquote>
 <p>Pkg.jl and the Pkg mode built in to the <a href="#REPL">REPL</a> let you install packages and manage environments. A &quot;package&quot; is a structured way of reusing code between projects and the active &quot;environment&quot; is responsible for determining which versions of packages to load. When working on a project, you can create a new environment or switch to an existing one by running</p>
-<pre><code class=language-julia-repl >&#40;jl_xSD2JZ&#41; pkg&gt; activate MyProject
+<pre><code class=language-julia-repl >&#40;jl_m4h8AH&#41; pkg&gt; activate MyProject
 Activating project at `~/work/modernjuliaworkflows.github.io/modernjuliaworkflows.github.io/MyProject`
 </code></pre>
 
-<p>or, from the command line, running <code>julia</code> with the &#91;startup flag&#93; <code>--project MyProject</code>. Then packages you install will be detailed in the <code>Project.toml</code> file, which gives a high-level overview of the project, as well as its low-level <code>Manifest.toml</code> cousin, which encodes a detailed snapshot of the whole environment. Sharing a project between computers with perfect reproducibility is as simple as sending a folder containing your code as well as a <code>Project.toml</code> and <code>Manifest.toml</code> so Julia can perfectly recreate the state of packages in the local environment. When a project is shared, the recipient can simply <code>instantiate</code> the environment and have a perfect copy.</p>
+<p>or, from the command line, running <code>julia</code> with the <a href="&#40;https://docs.julialang.org/en/v1/manual/command-line-interface/#command-line-interface&#41;">startup flag</a> <code>--project MyProject</code>. Then packages you install will be detailed in the <code>Project.toml</code> file, which gives a high-level overview of the project, as well as its low-level <code>Manifest.toml</code> cousin, which encodes a detailed snapshot of the whole environment. Sharing a project between computers with perfect reproducibility is as simple as sending a folder containing your code as well as a <code>Project.toml</code> and <code>Manifest.toml</code> so Julia can perfectly recreate the state of packages in the local environment. When a project is shared, the recipient can simply <code>instantiate</code> the environment and have a perfect copy.</p>
 <p>To add packages you can use the <code>add</code> command followed by any number of packages:</p>
 <pre><code class=language-julia-repl >&#40;MyProject&#41; pkg&gt; add Term OhMyREPL
 Resolving package versions...
