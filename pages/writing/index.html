@@ -57,20 +57,20 @@ julia&gt; String&#40;take&#33;&#40;io&#41;&#41;
 
 </ul>
 <pre><code class=language-julia-repl >&#40;modernjuliaworkflows.github.io&#41; pkg&gt; activate --temp
-Activating new project at `/tmp/jl_CNC0TS`
+Activating new project at `/tmp/jl_K8RYsj`
 
-&#40;jl_CNC0TS&#41; pkg&gt; status
-Status `/tmp/jl_CNC0TS/Project.toml` (empty project)
+&#40;jl_K8RYsj&#41; pkg&gt; status
+Status `/tmp/jl_K8RYsj/Project.toml` (empty project)
 
-&#40;jl_CNC0TS&#41; pkg&gt; add Example
+&#40;jl_K8RYsj&#41; pkg&gt; add Example
 Resolving package versions...
-    Updating `/tmp/jl_CNC0TS/Project.toml`
+    Updating `/tmp/jl_K8RYsj/Project.toml`
   [7876af07] + Example v0.5.3
-    Updating `/tmp/jl_CNC0TS/Manifest.toml`
+    Updating `/tmp/jl_K8RYsj/Manifest.toml`
   [7876af07] + Example v0.5.3
 
-&#40;jl_CNC0TS&#41; pkg&gt; status
-Status `/tmp/jl_CNC0TS/Project.toml`
+&#40;jl_K8RYsj&#41; pkg&gt; status
+Status `/tmp/jl_K8RYsj/Project.toml`
   [7876af07] Example v0.5.3
 </code></pre>
 
@@ -133,28 +133,55 @@ julia&gt; notebook&#40;&#41;</code></pre>
 julia&gt; Pluto.run&#40;&#41;</code></pre>
 <h2 id=packages ><a href="#packages" class=header-anchor >Packages</a></h2>
 <blockquote>
-<p>TLDR: Pkg.jl lets you <code>activate</code> independent, reproducible environments to <code>add</code> and <code>remove</code> project-specific &#40;versions of&#41; packages.</p>
+<p>TLDR: Julia projects are made with <code>&#93; activate</code>, and their details are stored in the <code>Project.toml</code> and <code>Manifest.toml</code>.</p>
 </blockquote>
-<p>Pkg.jl and the Pkg mode built in to the <a href="#REPL">REPL</a> let you install packages and manage environments. A &quot;package&quot; is a structured way of reusing code between projects and the active &quot;environment&quot; is responsible for determining which versions of packages to load. When working on a project, you can create a new environment or switch to an existing one by running</p>
-<pre><code class=language-julia-repl >&#40;jl_CNC0TS&#41; pkg&gt; activate MyProject
-Activating project at `~/work/modernjuliaworkflows.github.io/modernjuliaworkflows.github.io/MyProject`
+<p>Pkg.jl and the <a href="#package-mode">Pkg mode</a> built in to the <a href="#repl">REPL</a> let you install packages and manage environments. A &quot;package&quot; is a structured way of reusing code between projects and the active &quot;environment&quot; is responsible for determining which versions of packages to load.</p>
+<p>Pkg.jl can be used from the REPL, as seen before:</p>
+<pre><code class=language-julia-repl >&#40;jl_K8RYsj&#41; pkg&gt; activate MyPackage
+Activating project at `~/work/modernjuliaworkflows.github.io/modernjuliaworkflows.github.io/MyPackage`
 </code></pre>
 
-<p>or, from the command line, running <code>julia</code> with the <a href="#Configuration">startup flag</a> <code>--project MyProject</code>. After this, packages you install will be listed in the <code>Project.toml</code> file, which gives an overview of the project, as well as its low-level <code>Manifest.toml</code> cousin, which contains a detailed snapshot of packages and their dependencies. Sharing a project between computers is as simple as sending a folder containing your code as well as the <code>Project.toml</code> and <code>Manifest.toml</code>. With these files, the user can run <code>instantiate</code> in package mode and Julia can perfectly recreate the state of packages in the local environment.</p>
-<p>To add packages you can use the <code>add</code> command followed by any number of packages:</p>
-<pre><code class=language-julia-repl >&#40;MyProject&#41; pkg&gt; add Term OhMyREPL
+<p>or directly called in Julia mode as a package with the same commands:</p>
+<pre><code class=language-julia-repl >julia> using Pkg
+
+julia> Pkg.activate&#40;&quot;MyPackage&quot;&#41;
+</code></pre>
+
+<p>The <code>activate</code> command used above can be used to activate an existing project or create a new one and then activate it.</p>
+<p>You can also run <code>julia</code> from the command line with the <a href="#configuration">startup flag</a> <code>--project MyProject</code> &#40;which is what the <a href="#environments_in_vscode">VSCode plugin</a> does&#41;. After this, packages you install will be listed in the <code>Project.toml</code> and <code>Manifest.toml</code> files.</p>
+<p>The <code>Project.toml</code> contains information both about the project e.g name, uuid, authors, and its dependencies. Its dependency-related content is visible with <code>&#93;status</code> or just <code>&#93;st</code></p>
+<pre><code class=language-julia-repl >&#40;MyPackage&#41; pkg&gt; add Term OhMyREPL
 Resolving package versions...
-  No Changes to `~/work/modernjuliaworkflows.github.io/modernjuliaworkflows.github.io/MyProject/Project.toml`
-  No Changes to `~/work/modernjuliaworkflows.github.io/modernjuliaworkflows.github.io/MyProject/Manifest.toml`
+  No Changes to `~/work/modernjuliaworkflows.github.io/modernjuliaworkflows.github.io/MyPackage/Project.toml`
+  No Changes to `~/work/modernjuliaworkflows.github.io/modernjuliaworkflows.github.io/MyPackage/Manifest.toml`
+
+&#40;MyPackage&#41; pkg&gt; st
+Status `~/work/modernjuliaworkflows.github.io/modernjuliaworkflows.github.io/MyPackage/Project.toml`
+  [5fb14364] OhMyREPL v0.5.22
+  [22787eb5] Term v2.0.5
 </code></pre>
 
-<p>If you haven&#39;t <code>activate</code>d a local project, these packages will be installed in the &quot;global environment&quot; whose name in Pkg mode&#39;s prompt is <code>@v1.X</code><sup id="fnref:1"><a href="#fndef:1" class=fnref >[1]</a></sup>, corresponding to the version of Julia currently active. Packages installed globally are available no matter which local environment is active due to what&#39;s referred to as &quot;environment stacking&quot;.</p>
+<p>As dependencies often have their own dependencies, potential version conflicts must be resolved for an environment to be usable. The resolution is done automatically on package installation with <code>&#93;add</code>, environment instantiation with <code>&#93;instantiate</code>, and with the <code>&#93;resolve</code> command. The output of this resolution is stored in the <code>Manifest.toml</code>.</p>
+<p>Sharing a project between computers is as simple as sending a folder containing your code as well as the <code>Project.toml</code> and <code>Manifest.toml</code>. With these files, the user can run <code>&#93;instantiate</code> and Julia will perfectly<sup id="fnref:1"><a href="#fndef:1" class=fnref >[1]</a></sup> recreate the state of packages in the local environment.</p>
+<p>If you haven&#39;t <code>activate</code>d a local project, packages that you <code>add</code> will be installed in the &quot;global environment&quot; called <code>@v1.X</code><sup id="fnref:2"><a href="#fndef:2" class=fnref >[2]</a></sup> after the active version of Julia. Packages installed globally are available no matter which local environment is active because of &quot;environment stacking&quot;:</p>
 <p>When calling <code>using Package</code>, Julia determines what to load by going down the stack defined by <code>Base.LOAD_PATH</code>:</p>
-<pre><code class=language-julia-repl >julia&gt; Base.LOAD_PATH</code></pre>
-<p>The search begins at the local environment <code>@</code>, then the global environment <code>@v1.X</code>, and finally the standard library <code>@stdlib</code> that comes pre-installed with Julia. The two most important implications of this are firstly that development tools can be installed globally and <a href="#Configuration">loaded on startup</a> to be available to use, and secondly that packages in the standard library can be updated or fixed independently of the version of Julia you are using.</p>
+<pre><code class=language-julia-repl >julia> Base.LOAD_PATH
+3-element Vector{String}:
+ "@"
+ "@v#.#"
+ "@stdlib"
+</code></pre>
+
+<p>The search begins at the local environment <code>@</code>, then the global environment <code>@v#.#</code>, and finally the standard library <code>@stdlib</code> that comes pre-installed with Julia. The two most important implications of this are firstly that development tools can be installed globally and <a href="#configuration">loaded on startup</a> to be available to use, and secondly that packages in the standard library can be updated or fixed independently of the version of Julia you are using.</p>
 <p><table class=fndef  id="fndef:1">
     <tr>
         <td class=fndef-backref ><a href="#fnref:1">[1]</a>
+        <td class=fndef-content >Unless the <code>develop</code> command is used, which causes the project&#39;s dependencies to be stateful.
+    
+</table>
+<table class=fndef  id="fndef:2">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:2">[2]</a>
         <td class=fndef-content >The <code>@</code> before the name means that the environment is <a href="https://pkgdocs.julialang.org/v1/environments/#Shared-environments">&quot;shared&quot;</a>, which means you can <code>activate</code> shared environments with the <code>--shared</code> flag and it is located in <code>~/.julia/environments</code>. Notably it does <em>not</em> imply that it is part of the environment stack.
     
 </table>
@@ -246,6 +273,7 @@ end</code></pre>
 <li><p><a href="https://julialang.org/community/">community</a></p>
 
 </ul>
+
 <div class=page-foot >
     <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> G. Dalle, J. Smit, A. Hill. Last modified: August 04, 2023. 
     Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
