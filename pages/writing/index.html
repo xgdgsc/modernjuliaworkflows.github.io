@@ -1,4 +1,4 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/styles/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <link rel=stylesheet  href="/css/custom.css"> <link rel=stylesheet  href="/libs/highlight/styles/github-dark.min.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>Writing your code</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h1><a href="/">MoJuWo</a></h1> <p class=lead ><b>Mo</b>dern <b>Ju</b>lia <b>Wo</b>rkflows</p> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item active" href="/pages/writing/">Writing</a> <a class="sidebar-nav-item " href="/pages/sharing/">Sharing</a> <a class="sidebar-nav-item " href="/pages/optimizing/">Optimizing</a> <a class="sidebar-nav-item " href="/pages/further/">Going further</a> </nav> <p>&copy; G. Dalle, J. Smit, A. Hill.</p> </div> </div> <div class="content container"> <div class=franklin-content ><h1 id=writing_your_code ><a href="#writing_your_code" class=header-anchor >Writing your code</a></h1> <div class=franklin-toc ><ol><li><a href="#installation">Installation</a><li><a href="#repl">REPL</a><li><a href="#editor">Editor</a><li><a href="#running_code">Running code</a><li><a href="#notebooks">Notebooks</a><li><a href="#packages">Packages</a><li><a href="#configuration">Configuration</a><li><a href="#esthetics">Esthetics</a><li><a href="#debugging">Debugging</a><li><a href="#other_languages">Other languages</a><li><a href="#getting_help">Getting help</a></ol></div> <h2 id=installation ><a href="#installation" class=header-anchor >Installation</a></h2> <blockquote> <p>TLDR: Use <code>juliaup</code></p> </blockquote> <p>Do not install Julia from the official <a href="https://julialang.org/downloads/">downloads</a> page, use <strong><a href="https://github.com/JuliaLang/juliaup"><code>juliaup</code></a></strong> instead. You can get it from the Windows store, or from the command line on Unix systems:</p> <pre><code class=language-bash >curl -fsSL https://install.julialang.org | sh</code></pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/styles/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_hyde.css"> <link rel=stylesheet  href="/css/custom.css"> <link rel=stylesheet  href="/libs/highlight/styles/github-dark.min.css"> <style> html {font-size: 17px;} .franklin-content {position: relative; padding-left: 8%; padding-right: 5%; line-height: 1.35em;} @media (min-width: 940px) { .franklin-content {width: 100%; margin-left: auto; margin-right: auto;} } @media (max-width: 768px) { .franklin-content {padding-left: 6%; padding-right: 6%;} } </style> <link rel=icon  href="/assets/favicon.png"> <title>Writing your code</title> <div class=sidebar > <div class="container sidebar-sticky"> <div class=sidebar-about > <h1><a href="/">MoJuWo</a></h1> <p class=lead ><b>Mo</b>dern <b>Ju</b>lia <b>Wo</b>rkflows</p> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item active" href="/pages/writing/">Writing</a> <a class="sidebar-nav-item " href="/pages/sharing/">Sharing</a> <a class="sidebar-nav-item " href="/pages/optimizing/">Optimizing</a> <a class="sidebar-nav-item " href="/pages/further/">Going further</a> </nav> <p>&copy; G. Dalle, J. Smit, A. Hill.</p> </div> </div> <div class="content container"> <div class=franklin-content ><h1 id=writing_your_code ><a href="#writing_your_code" class=header-anchor >Writing your code</a></h1> <div class=franklin-toc ><ol><li><a href="#installation">Installation</a><li><a href="#repl">REPL</a><li><a href="#editor">Editor</a><li><a href="#running_code">Running code</a><li><a href="#notebooks">Notebooks</a><li><a href="#environments">Environments</a><li><a href="#local_packages">Local packages</a><li><a href="#configuration">Configuration</a><li><a href="#esthetics">Esthetics</a><li><a href="#debugging">Debugging</a><li><a href="#other_languages">Other languages</a><li><a href="#getting_help">Getting help</a></ol></div> <h2 id=installation ><a href="#installation" class=header-anchor >Installation</a></h2> <blockquote> <p>TLDR: Use <code>juliaup</code></p> </blockquote> <p>Do not install Julia from the official <a href="https://julialang.org/downloads/">downloads</a> page, use <strong><a href="https://github.com/JuliaLang/juliaup"><code>juliaup</code></a></strong> instead. You can get it from the Windows store, or from the command line on Unix systems:</p> <pre><code class=language-bash >curl -fsSL https://install.julialang.org | sh</code></pre>
 <p>It provides <a href="https://github.com/JuliaLang/juliaup#using-juliaup">various utilities</a> to download, update, organize and switch between Julia versions. As a bonus, you no longer have to manually specify the path to your executable.</p>
 <p><code>juliaup</code> relies on adaptive shortcuts called &quot;channels&quot;, which allow you to access specific Julia versions without giving their exact number. Upon installation, the <a href="https://julialang.org/downloads/#current_stable_release">current stable release</a> is downloaded and selected as the default:</p>
 <pre><code class=language-bash >juliaup add release  # done automatically
@@ -57,20 +57,20 @@ julia&gt; String&#40;take&#33;&#40;io&#41;&#41;
 
 </ul>
 <pre><code class=language-julia-repl >&#40;modernjuliaworkflows.github.io&#41; pkg&gt; activate --temp
-Activating new project at `/tmp/jl_K8RYsj`
+Activating new project at `/tmp/jl_4Jklt5`
 
-&#40;jl_K8RYsj&#41; pkg&gt; status
-Status `/tmp/jl_K8RYsj/Project.toml` (empty project)
+&#40;jl_4Jklt5&#41; pkg&gt; status
+Status `/tmp/jl_4Jklt5/Project.toml` (empty project)
 
-&#40;jl_K8RYsj&#41; pkg&gt; add Example
+&#40;jl_4Jklt5&#41; pkg&gt; add Example
 Resolving package versions...
-    Updating `/tmp/jl_K8RYsj/Project.toml`
+    Updating `/tmp/jl_4Jklt5/Project.toml`
   [7876af07] + Example v0.5.3
-    Updating `/tmp/jl_K8RYsj/Manifest.toml`
+    Updating `/tmp/jl_4Jklt5/Manifest.toml`
   [7876af07] + Example v0.5.3
 
-&#40;jl_K8RYsj&#41; pkg&gt; status
-Status `/tmp/jl_K8RYsj/Project.toml`
+&#40;jl_4Jklt5&#41; pkg&gt; status
+Status `/tmp/jl_4Jklt5/Project.toml`
   [7876af07] Example v0.5.3
 </code></pre>
 
@@ -108,7 +108,7 @@ writing.md
 <li><p><code>Julia: Execute active File in REPL</code></p>
 
 </ul>
-<p>When keeping the same REPL open for a long time, it&#39;s common to end up with a &quot;polluted&quot; workspace where the definitions of certain variables or functions have been overwritten in unexpected ways. This, along with other events like <code>struct</code> redefinitions, might force you to restart your REPL now and again. One way to help with workspace tidiness is to take advantage of the <a href="#Packages">module system</a> to separate the reusable parts of your code from the one-off parts that are only relevant for a certain script.</p>
+<p>When keeping the same REPL open for a long time, it&#39;s common to end up with a &quot;polluted&quot; workspace where the definitions of certain variables or functions have been overwritten in unexpected ways. This, along with other events like <code>struct</code> redefinitions, might force you to restart your REPL now and again. One way to help with workspace tidiness is to take advantage of the <a href="#local_packages">module system</a> to separate the reusable parts of your code from the one-off parts that are only relevant for a certain script.</p>
 <h2 id=notebooks ><a href="#notebooks" class=header-anchor >Notebooks</a></h2>
 <blockquote>
 <p>TLDR: Jupyter or Pluto, depending on your reactivity needs</p>
@@ -131,13 +131,13 @@ julia&gt; notebook&#40;&#41;</code></pre>
 <pre><code class=language-julia-repl >julia&gt; using Pluto
 
 julia&gt; Pluto.run&#40;&#41;</code></pre>
-<h2 id=packages ><a href="#packages" class=header-anchor >Packages</a></h2>
+<h2 id=environments ><a href="#environments" class=header-anchor >Environments</a></h2>
 <blockquote>
 <p>TLDR: Julia projects are made with <code>&#93; activate</code>, and their details are stored in the <code>Project.toml</code> and <code>Manifest.toml</code>.</p>
 </blockquote>
 <p>Pkg.jl and the <a href="#package-mode">Pkg mode</a> built in to the <a href="#repl">REPL</a> let you install packages and manage environments. A &quot;package&quot; is a structured way of reusing code between projects and the active &quot;environment&quot; is responsible for determining which versions of packages to load.</p>
 <p>Pkg.jl can be used from the REPL, as seen before:</p>
-<pre><code class=language-julia-repl >&#40;jl_K8RYsj&#41; pkg&gt; activate MyPackage
+<pre><code class=language-julia-repl >&#40;jl_4Jklt5&#41; pkg&gt; activate MyPackage
 Activating project at `~/work/modernjuliaworkflows.github.io/modernjuliaworkflows.github.io/MyPackage`
 </code></pre>
 
@@ -186,7 +186,9 @@ Status `~/work/modernjuliaworkflows.github.io/modernjuliaworkflows.github.io/MyP
     
 </table>
  </p>
-<h3 id=local_packages ><a href="#local_packages" class=header-anchor >Local packages</a></h3>
+<h3 id=environments_in_vscode ><a href="#environments_in_vscode" class=header-anchor >Environments in VSCode</a></h3>
+<p>In VSCode, if your directory contains a <code>Project.toml</code>, you will be prompted whether you want to make this the default environment. With this option set, anytime you <a href="#running-code">open a REPL</a> the environment will already be the local one.</p>
+<h2 id=local_packages ><a href="#local_packages" class=header-anchor >Local packages</a></h2>
 <p>Local packages are a smart way of reusing code between projects. You could load common code directly with <code>include&#40;&quot;path/to/file.jl&quot;&#41;</code>, but a local package allows you to benefit from package niceties:</p>
 <ol>
 <li><p>You don&#39;t have to specify the path, you can just write <code>using MyPackage</code>,</p>
@@ -198,22 +200,6 @@ Status `~/work/modernjuliaworkflows.github.io/modernjuliaworkflows.github.io/MyP
 <li><p>&#40;Bonus&#33;&#41; You get used to developing reusable, modular code.</p>
 
 </ol>
-<h3 id=environments_in_vscode ><a href="#environments_in_vscode" class=header-anchor >Environments in VSCode</a></h3>
-<p>In VSCode, if your directory contains a <code>Project.toml</code>, you will be prompted whether you want to make this the default environment. With this option set, anytime you <a href="#running-code">open a REPL</a> the environment will already be the local one.</p>
-<ul>
-<li><p><a href="https://github.com/JuliaLang/Pkg.jl">Pkg.jl</a></p>
-
-<li><p><a href="https://github.com/timholy/Revise.jl">Revise.jl</a></p>
-
-<li><p>stacking environments</p>
-
-<li><p><a href="https://github.com/peng1999/PkgDependency.jl">PkgDependency.jl</a></p>
-
-<li><p><a href="https://www.julia-vscode.org/docs/stable/userguide/env/">environments in VSCode</a></p>
-
-<li><p>Local packages</p>
-
-</ul>
 <h2 id=configuration ><a href="#configuration" class=header-anchor >Configuration</a></h2>
 <p>Julia accepts <a href="https://docs.julialang.org/en/v1/manual/command-line-interface/#command-line-interface">startup flags</a> to handle settings such as the number of threads available. In addition, most Julia developers also have a <a href="https://docs.julialang.org/en/v1/manual/command-line-interface/#Startup-file">startup file</a> which is run automatically every time the language is started. It is located at <code>.julia/config/startup.jl</code>.</p>
 <p>The basic component that everyone puts in the startup file is Revise.jl:</p>
